@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Pokedex</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="sexTextView">Sexo</string>
+    <string name="login_trainerTextEditInput">Entrenador</string>
+    <string name="login_ImageView">Login</string>
+    <string name="maleRadiobutton">Masculino</string>
+    <string name="femaleRadiobutton">Femenino</string>
+    <string name="loginButtonText">Entrar</string>
+</resources>
