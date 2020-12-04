@@ -94,6 +94,7 @@
         android:text="@string/loginButtonText"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/topLayout"
+        android:enabled="false"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/topLayout"
         app:layout_constraintTop_toBottomOf="@+id/topLayout"

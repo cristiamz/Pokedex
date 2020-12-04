@@ -22,7 +22,11 @@
         android:id="@+id/pkmDetailFragment"
         android:name="com.snowcap.pokedex.fragments.pkmDetailFragment"
         android:label="fragment_pkm_detail"
-        tools:layout="@layout/fragment_pkm_detail" />
+        tools:layout="@layout/fragment_pkm_detail" >
+        <argument
+            android:name="Pokemon"
+            app:argType="com.snowcap.pokedex.models.Pokemon" />
+    </fragment>
     <fragment
         android:id="@+id/pkmListFragment"
         android:name="com.snowcap.pokedex.fragments.pkmListFragment"
