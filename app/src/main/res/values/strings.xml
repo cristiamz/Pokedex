@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Pokedex</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="sexTextView">Sexo</string>
+    <string name="login_trainerTextEditInput">Entrenador</string>
+    <string name="login_ImageView">Login</string>
+    <string name="maleRadiobutton">Masculino</string>
+    <string name="femaleRadiobutton">Femenino</string>
+    <string name="loginButtonText">Entrar</string>
+    <string name="pkmDefaultName">Gyrados</string>
+    <string name="empty_mail_text">Pokemon no identificado</string>
+</resources>

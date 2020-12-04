@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav_graph"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.snowcap.pokedex.fragments.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_pkmListFragment"
+            app:destination="@id/pkmListFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/pkmDetailFragment"
+        android:name="com.snowcap.pokedex.fragments.pkmDetailFragment"
+        android:label="fragment_pkm_detail"
+        tools:layout="@layout/fragment_pkm_detail" >
+        <argument
+            android:name="Pokemon"
+            app:argType="com.snowcap.pokedex.models.Pokemon" />
+    </fragment>
+    <fragment
+        android:id="@+id/pkmListFragment"
+        android:name="com.snowcap.pokedex.fragments.pkmListFragment"
+        android:label="fragment_pkm_list"
+        tools:layout="@layout/fragment_pkm_list" >
+        <action
+            android:id="@+id/action_pkmListFragment_to_pkmDetailFragment"
+            app:destination="@id/pkmDetailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <argument
+            android:name="trainer"
+            app:argType="com.snowcap.pokedex.models.Trainer" />
+    </fragment>
+</navigation>
