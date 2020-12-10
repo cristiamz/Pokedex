@@ -3,7 +3,7 @@ package com.snowcap.pokedex.models
 import android.os.Parcel
 import android.os.Parcelable
 
-data class Pokemon(val pictureUrl: String, val name: String) : Parcelable {
+data class Pokemon(val pictureUrl: String, var name: String) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString() ?: "",
         parcel.readString() ?: ""

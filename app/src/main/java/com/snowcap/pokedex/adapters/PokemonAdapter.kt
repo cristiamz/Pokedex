@@ -5,17 +5,18 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.snowcap.pokedex.R
 import com.snowcap.pokedex.models.Pokemon
+import com.snowcap.pokedex.network.models.PokemonItem
 import com.snowcap.pokedex.viewholders.PokemonItemViewHolder
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.subjects.PublishSubject
 
 class PokemonAdapter : RecyclerView.Adapter<PokemonItemViewHolder>() {
 
-    private val clickListener: PublishSubject<Pokemon> = PublishSubject.create()
+    private val clickListener: PublishSubject<PokemonItem> = PublishSubject.create()
 
-    val onItemClicked: Observable<Pokemon> = clickListener.hide()
+    val onItemClicked: Observable<PokemonItem> = clickListener.hide()
 
-    var pokedexList: List<Pokemon> = emptyList()
+    var pokedexList: List<PokemonItem> = emptyList()
         set(value) {
             field = value
             notifyDataSetChanged()
