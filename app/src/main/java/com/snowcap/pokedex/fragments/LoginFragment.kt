@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.jakewharton.rxbinding4.view.clicks
+import com.jakewharton.rxbinding4.widget.checked
+import com.jakewharton.rxbinding4.widget.checkedChanges
 import com.jakewharton.rxbinding4.widget.textChanges
 import com.snowcap.pokedex.R
 import com.snowcap.pokedex.models.Trainer
@@ -40,10 +42,15 @@ class LoginFragment : Fragment() {
             loginButton.clicks()
                 .throttleFirst(500, TimeUnit.MILLISECONDS)
                 .subscribe {
+                    val gender = when (sexRadioGroup.checkedRadioButtonId) {
+                        R.id.maleRadioButton -> "Male"
+                        else -> "Female"
+                    }
+
                     val action = LoginFragmentDirections.actionLoginFragmentToPkmListFragment(
                         Trainer(
                             trainerTextEditInput.text.toString(),
-                            "Male"
+                            gender
                         )
                     )
                     findNavController().navigate(action)
@@ -56,11 +63,20 @@ class LoginFragment : Fragment() {
                 .debounce(500, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
-                    val areValidFields: Boolean = !TextUtils.isEmpty(trainerTextEditInput.text)
+                    val areValidFields: Boolean = !TextUtils.isEmpty(trainerTextEditInput.text) && sexRadioGroup.checkedRadioButtonId > -1
                     loginButton.isEnabled = areValidFields
                     trainerTextInputLayout.error =
-                        if (!areValidFields) "Campo Requerido" else null
+                        if (TextUtils.isEmpty(trainerTextEditInput.text)) "Campo Requerido" else null
+                })
 
+        disposables.add(
+            sexRadioGroup.checkedChanges()
+                .skipInitialValue()
+                .debounce(500, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe {
+                    val areValidFields: Boolean = !TextUtils.isEmpty(trainerTextEditInput.text) && sexRadioGroup.checkedRadioButtonId > -1
+                    loginButton.isEnabled = areValidFields
                 })
 
     }

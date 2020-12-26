@@ -1,29 +1,33 @@
-package com.snowcap.pokedex.models
+package com.snowcap.pokedex.models.Pokemon.Types
 
 import android.os.Parcel
 import android.os.Parcelable
 
-data class Pokemon(val pictureUrl: String, var name: String) : Parcelable {
+data class Type(
+    val name: String,
+    val url: String
+) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString() ?: "",
         parcel.readString() ?: ""
-    )
+    ) {
+    }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(pictureUrl)
         parcel.writeString(name)
+        parcel.writeString(url)
     }
 
     override fun describeContents(): Int {
         return 0
     }
 
-    companion object CREATOR : Parcelable.Creator<Pokemon> {
-        override fun createFromParcel(parcel: Parcel): Pokemon {
-            return Pokemon(parcel)
+    companion object CREATOR : Parcelable.Creator<Type> {
+        override fun createFromParcel(parcel: Parcel): Type {
+            return Type(parcel)
         }
 
-        override fun newArray(size: Int): Array<Pokemon?> {
+        override fun newArray(size: Int): Array<Type?> {
             return arrayOfNulls(size)
         }
     }

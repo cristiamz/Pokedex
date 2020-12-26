@@ -3,9 +3,9 @@ package com.snowcap.pokedex.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.snowcap.pokedex.models.Pokemon.Pokemon
 import com.snowcap.pokedex.network.RetrofitProvider
-import com.snowcap.pokedex.network.models.PokemonItem
-import com.snowcap.pokedex.network.models.PokemonListDataResponse
+import com.snowcap.pokedex.models.Pokemon.PokemonListDataResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -13,13 +13,13 @@ import retrofit2.Response
 class PokemonListViewModel : ViewModel() {
     private val retrofitProvider = RetrofitProvider()
     private val offset: Int = 0
-    private val limit: Int = 1118
+    private val limit: Int = 20
 
-    private val pokemonListResponse: MutableLiveData<List<PokemonItem>> = MutableLiveData()
+    private val pokemonListResponse: MutableLiveData<List<Pokemon>> = MutableLiveData()
     private val isMakingRequest: MutableLiveData<Boolean> = MutableLiveData()
     private val isError: MutableLiveData<Boolean> = MutableLiveData()
 
-    fun getPokemonListResponse() : LiveData<List<PokemonItem>> {
+    fun getPokemonListResponse() : LiveData<List<Pokemon>> {
         return pokemonListResponse
     }
 

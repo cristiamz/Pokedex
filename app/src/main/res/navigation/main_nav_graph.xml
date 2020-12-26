@@ -20,16 +20,16 @@
     </fragment>
     <fragment
         android:id="@+id/pkmDetailFragment"
-        android:name="com.snowcap.pokedex.fragments.pkmDetailFragment"
+        android:name="com.snowcap.pokedex.fragments.PokemonDetailFragment"
         android:label="fragment_pkm_detail"
         tools:layout="@layout/fragment_pkm_detail" >
         <argument
-            android:name="Pokemon"
-            app:argType="com.snowcap.pokedex.models.Pokemon" />
+            android:name="pokemon"
+            app:argType="com.snowcap.pokedex.models.Pokemon.Pokemon" />
     </fragment>
     <fragment
         android:id="@+id/pkmListFragment"
-        android:name="com.snowcap.pokedex.fragments.pkmListFragment"
+        android:name="com.snowcap.pokedex.fragments.PokemonListFragment"
         android:label="fragment_pkm_list"
         tools:layout="@layout/fragment_pkm_list" >
         <action

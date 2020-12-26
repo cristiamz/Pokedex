@@ -3,10 +3,8 @@ package com.snowcap.pokedex.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.snowcap.pokedex.models.Pokemon.Pokemon
 import com.snowcap.pokedex.network.RetrofitProvider
-import com.snowcap.pokedex.network.models.PokemonDetail
-import com.snowcap.pokedex.network.models.PokemonItem
-import com.snowcap.pokedex.network.models.PokemonListDataResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -14,11 +12,11 @@ import retrofit2.Response
 class PokemonDetailViewModel : ViewModel() {
     private val retrofitProvider = RetrofitProvider()
 
-    private val pokemonDetail: MutableLiveData<PokemonDetail> = MutableLiveData()
+    private val pokemonDetail: MutableLiveData<Pokemon> = MutableLiveData()
     private val isMakingRequest: MutableLiveData<Boolean> = MutableLiveData()
     private val isError: MutableLiveData<Boolean> = MutableLiveData()
 
-    fun getPokemonListResponse() : LiveData<PokemonDetail> {
+    fun getPokemonListResponse() : LiveData<Pokemon> {
         return pokemonDetail
     }
 
@@ -34,10 +32,10 @@ class PokemonDetailViewModel : ViewModel() {
         isMakingRequest.postValue(true)
         retrofitProvider.getPokeApiService().getPokemonDetail(pokemonId)
             .enqueue(object :
-                Callback<PokemonDetail> {
+                Callback<Pokemon> {
                 override fun onResponse(
-                    call: Call<PokemonDetail>,
-                    response: Response<PokemonDetail>
+                    call: Call<Pokemon>,
+                    response: Response<Pokemon>
                 ) {
                     isMakingRequest.postValue(false)
                     if (response.isSuccessful) {
@@ -49,7 +47,7 @@ class PokemonDetailViewModel : ViewModel() {
                     }
                 }
 
-                override fun onFailure(call: Call<PokemonDetail>, t: Throwable) {
+                override fun onFailure(call: Call<Pokemon>, t: Throwable) {
                     isMakingRequest.postValue(false)
                     isError.postValue(true)
                 }
