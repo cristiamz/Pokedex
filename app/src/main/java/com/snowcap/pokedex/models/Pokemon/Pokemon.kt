@@ -19,19 +19,19 @@ data class Pokemon(
     //held_items
     //moves
     //species
-    val sprite: Sprites,
+    val sprites: Sprites,
     //stats
     val types : List<Types>,
     val isFavorite:Boolean ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
-        parcel.readString() ?: "",
-        parcel.readString() ?: "",
+        parcel.readString()!!,
+        parcel.readString()!!,
         parcel.readInt(),
         parcel.readByte() != 0.toByte(),
         parcel.readInt(),
         parcel.readInt(),
-        parcel.readString() ?: "",
+        parcel.readString()!!,
         parcel.readParcelable(Sprites::class.java.classLoader)!!,
         parcel.createTypedArrayList(Types)!!,
         parcel.readByte() != 0.toByte()
@@ -47,7 +47,7 @@ data class Pokemon(
         parcel.writeInt(order)
         parcel.writeInt(weight)
         parcel.writeString(location_area_encounters)
-        parcel.writeParcelable(sprite, flags)
+        parcel.writeParcelable(sprites, flags)
         parcel.writeTypedList(types)
         parcel.writeByte(if (isFavorite) 1 else 0)
     }
@@ -66,29 +66,3 @@ data class Pokemon(
         }
     }
 }
-
-//data class Pokemon(val pictureUrl: String, var name: String) : Parcelable {
-//    constructor(parcel: Parcel) : this(
-//        parcel.readString() ?: "",
-//        parcel.readString() ?: ""
-//    )
-//
-//    override fun writeToParcel(parcel: Parcel, flags: Int) {
-//        parcel.writeString(pictureUrl)
-//        parcel.writeString(name)
-//    }
-//
-//    override fun describeContents(): Int {
-//        return 0
-//    }
-//
-//    companion object CREATOR : Parcelable.Creator<Pokemon> {
-//        override fun createFromParcel(parcel: Parcel): Pokemon {
-//            return Pokemon(parcel)
-//        }
-//
-//        override fun newArray(size: Int): Array<Pokemon?> {
-//            return arrayOfNulls(size)
-//        }
-//    }
-//}

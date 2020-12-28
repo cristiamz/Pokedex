@@ -24,6 +24,7 @@ class PokemonDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         PokemonName.text = args.pokemon.name.capitalize()
+        //PokemonName.text = args.pokemon.capitalize()
     }
 
 }
