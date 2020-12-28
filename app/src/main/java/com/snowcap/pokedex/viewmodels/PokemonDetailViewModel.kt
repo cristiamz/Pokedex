@@ -27,31 +27,4 @@ class PokemonDetailViewModel : ViewModel() {
     fun getIsError() : LiveData<Boolean> {
         return isError
     }
-
-    fun getPokemonDetail(pokemonId: Int) {
-        isMakingRequest.postValue(true)
-        retrofitProvider.getPokeApiService().getPokemonDetail(pokemonId)
-            .enqueue(object :
-                Callback<Pokemon> {
-                override fun onResponse(
-                    call: Call<Pokemon>,
-                    response: Response<Pokemon>
-                ) {
-                    isMakingRequest.postValue(false)
-                    if (response.isSuccessful) {
-                        response.body()?.let { unwrappedResponse ->
-                            pokemonDetail.postValue(unwrappedResponse)
-                        }
-                    } else {
-                        isError.postValue(true)
-                    }
-                }
-
-                override fun onFailure(call: Call<Pokemon>, t: Throwable) {
-                    isMakingRequest.postValue(false)
-                    isError.postValue(true)
-                }
-            })
-    }
-
 }

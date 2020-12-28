@@ -5,17 +5,17 @@ import android.os.Parcelable
 
 data class Types(
     val slot: Int,
-    val type: List<Type>
+    val type: Type
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
-        parcel.createTypedArrayList(Type)!!
+        parcel.readParcelable(Type::class.java.classLoader)!!
     ) {
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(slot)
-        parcel.writeTypedList(type)
+        parcel.writeParcelable(type, flags)
     }
 
     override fun describeContents(): Int {
