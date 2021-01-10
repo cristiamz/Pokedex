@@ -16,4 +16,17 @@
     <string name="error_text">Ha ocurrido un error!</string>
     <string name="Favorite">Favorito</string>
     <string name="pkmName">Pokemon name</string>
+    <string name="_0">0</string>
+    <string name="base_experience">Base experience</string>
+    <string name="shiny_male">shiny male</string>
+    <string name="female">female</string>
+    <string name="shiny_female">shiny female</string>
+    <string name="male">male</string>
+    <string name="pokemon_details">Pokemon Details</string>
+    <string name="height">Height</string>
+    <string name="weight">Weight</string>
+    <string name="location_area_encounters">Location area encounters</string>
+    <string name="pokemon_type">Pokemon Type</string>
+    <string name="pokemonimage">PokemonImage</string>
+    <string name="pokemonfavorite">PokemonFavorite</string>
 </resources>
