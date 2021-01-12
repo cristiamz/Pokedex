@@ -23,8 +23,8 @@ class PokemonListViewModel(application: Application) : AndroidViewModel(applicat
     }
 
     private val retrofitProvider = RetrofitProvider()
-    private val offset: Int = 200
-    private val limit: Int = 50
+    private val offset: Int = 0
+    private val limit: Int = 100
 
     private val isMakingRequest: MutableLiveData<Boolean> = MutableLiveData()
     private val isError: MutableLiveData<Boolean> = MutableLiveData()
