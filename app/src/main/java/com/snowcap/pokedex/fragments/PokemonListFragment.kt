@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.google.android.material.snackbar.Snackbar
+import com.jakewharton.rxbinding4.widget.textChanges
 import com.snowcap.pokedex.R
 import com.snowcap.pokedex.adapters.PokemonListAdapter
 import com.snowcap.pokedex.models.Pokemon.Pokemon
@@ -19,17 +20,15 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_pkm_list.*
+import java.util.concurrent.TimeUnit
 
 class PokemonListFragment : Fragment() {
     private val disposables: CompositeDisposable = CompositeDisposable()
     private val listViewModel: PokemonListViewModel by viewModels()
-
-    //private val PokedexDataViewModel: PokedexDataViewModel by viewModels()
     private val args: PokemonListFragmentArgs by navArgs()
 
     private val adapter = PokemonListAdapter { pokemon ->
-        Log.d("CLICKED", "Pokemon ${pokemon.name}")
-        //PokedexDataViewModel.saveFavorite(pokemon,true)
+        listViewModel.saveFavorite(pokemon, true)
         val action = PokemonListFragmentDirections.actionPkmListFragmentToPkmDetailFragment(pokemon)
         findNavController().navigate(action)
     }
@@ -51,11 +50,17 @@ class PokemonListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         pokemonRecyclerView.adapter = adapter
+        pokemonRecyclerView.addItemDecoration(
+            DividerItemDecoration(
+                requireContext(),
+                DividerItemDecoration.VERTICAL
+            )
+        )
 
-//        welcomeText.text = when (args.trainer.gender) {
-//            "Male" -> "Bienvenido, ${args.trainer.name}"
-//            else -> "Bienvenida, ${args.trainer.name}"
-//        }
+        welcomeText.text = when (args.trainer.gender) {
+            "Male" -> "Bienvenido, ${args.trainer.name}"
+            else -> "Bienvenida, ${args.trainer.name}"
+        }
 
         listViewModel.getPokemonList()
             .subscribeOn(Schedulers.io())
@@ -63,26 +68,13 @@ class PokemonListFragment : Fragment() {
             .doOnError { error ->
                 Log.d("error", error.toString())
             }
-            .onErrorReturn { emptyList<Pokemon>() }
+            .onErrorReturn { emptyList() }
             .subscribe { pokemonList ->
                 adapter.pokedexList = pokemonList
-                pokemonRecyclerView.addItemDecoration(
-                    DividerItemDecoration(
-                        requireContext(),
-                        DividerItemDecoration.VERTICAL
-                    )
-                )
-
                 pokemonRecyclerView.visibility =
                     if (pokemonList.isEmpty()) View.GONE else View.VISIBLE
                 emptyTextView.visibility =
                     if (pokemonList.isEmpty()) View.VISIBLE else View.GONE
-
-//                favorite.setOnClickListener {view ->
-//
-//                    Log.d("CLICKED", "Star Clicked")
-//                    //PokedexDataViewModel.saveFavorite(pokemon,true)
-//                }
             }
 
         listViewModel.getIsLoading().observe(viewLifecycleOwner) { isLoading ->
@@ -92,6 +84,16 @@ class PokemonListFragment : Fragment() {
         listViewModel.getIsError().observe(viewLifecycleOwner) { isError ->
             Snackbar.make(mainLayout, R.string.error_text, Snackbar.LENGTH_LONG).show()
         }
+
+        disposables.add(SearchTextInputEditText.textChanges()
+            .skipInitialValue()
+            .debounce(300, TimeUnit.MILLISECONDS)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                adapter.filter.filter(it)
+            })
+
     }
 }
 
