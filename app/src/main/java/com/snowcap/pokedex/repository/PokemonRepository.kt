@@ -18,6 +18,6 @@ class PokemonRepository(private val pokemonDAO: PokemonDAO) {
         return pokemonDAO.getPokemonByName(pokemonName)
     }
 
-    val allPokemon: Flow<List<Pokemon>> = pokemonDAO.getAllPokemon()
+    val favoritePokemon: Flow<List<String>> = pokemonDAO.getAllFavoritePokemon()
 
 }

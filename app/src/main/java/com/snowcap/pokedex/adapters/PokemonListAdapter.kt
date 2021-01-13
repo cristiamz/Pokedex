@@ -23,6 +23,12 @@ class PokemonListAdapter(val clickListener:(Pokemon) -> Unit)  :
             notifyDataSetChanged()
         }
 
+    var favoritePokemon: List<String> = emptyList()
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
+
     private var filteredPokemons: List<Pokemon> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonViewHolder {
@@ -32,8 +38,9 @@ class PokemonListAdapter(val clickListener:(Pokemon) -> Unit)  :
     }
 
     override fun onBindViewHolder(holder: PokemonViewHolder, position: Int) {
-         holder.bind(filteredPokemons[position], clickListener)
+         holder.bind(filteredPokemons[position],favoritePokemon.contains(filteredPokemons[position].name), clickListener)
     }
+
     override fun getItemCount() = filteredPokemons.size
 
     override fun getFilter(): Filter {

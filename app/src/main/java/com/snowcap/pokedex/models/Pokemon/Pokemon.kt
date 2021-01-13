@@ -22,7 +22,7 @@ data class Pokemon(
     val sprites: Sprites,
     //stats
     val types : List<Types>,
-    val isFavorite:Boolean ) : Parcelable {
+    var isFavorite:Boolean ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
         parcel.readString()!!,

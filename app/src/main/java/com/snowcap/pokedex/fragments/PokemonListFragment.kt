@@ -29,7 +29,9 @@ class PokemonListFragment : Fragment() {
 
     private val adapter = PokemonListAdapter { pokemon ->
         listViewModel.saveFavorite(pokemon, true)
-        val action = PokemonListFragmentDirections.actionPkmListFragmentToPkmDetailFragment(pokemon)
+        val newPokemon :Pokemon = pokemon
+
+        val action = PokemonListFragmentDirections.actionPkmListFragmentToPkmDetailFragment(newPokemon)
         findNavController().navigate(action)
     }
 
@@ -49,6 +51,12 @@ class PokemonListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        welcomeText.text = when (args.trainer.gender) {
+            "Male" -> "Bienvenido, ${args.trainer.name}"
+            else -> "Bienvenida, ${args.trainer.name}"
+        }
+
         pokemonRecyclerView.adapter = adapter
         pokemonRecyclerView.addItemDecoration(
             DividerItemDecoration(
@@ -57,9 +65,8 @@ class PokemonListFragment : Fragment() {
             )
         )
 
-        welcomeText.text = when (args.trainer.gender) {
-            "Male" -> "Bienvenido, ${args.trainer.name}"
-            else -> "Bienvenida, ${args.trainer.name}"
+        listViewModel.getFavoritePokemon().observe(viewLifecycleOwner) { favoriteList ->
+            adapter.favoritePokemon = favoriteList
         }
 
         listViewModel.getPokemonList()

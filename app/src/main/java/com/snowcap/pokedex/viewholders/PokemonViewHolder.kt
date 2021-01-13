@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.pokemon_list_item.view.*
 
 class PokemonViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    fun bind(pokemon: Pokemon, clickListener: (Pokemon) -> Unit) {
+    fun bind(pokemon: Pokemon, isFavorite: Boolean, clickListener: (Pokemon) -> Unit) {
 
         itemView.pokemonNameTextView.text = pokemon.name.capitalize()
         itemView.pokemonSubTextView.text =
@@ -31,7 +31,7 @@ class PokemonViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         }
 
         val isFavoriteIcon =
-            if (pokemon.isFavorite) R.drawable.ic_baseline_arrow_forward_ios_24 else R.drawable.ic_baseline_star_border_24
+            if (isFavorite) R.drawable.ic_baseline_star_rate_24 else R.drawable.ic_baseline_star_border_24
         itemView.favorite.setImageResource(isFavoriteIcon)
 
 //        itemView.setOnClickListener {

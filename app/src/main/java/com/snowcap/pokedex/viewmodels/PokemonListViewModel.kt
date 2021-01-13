@@ -2,10 +2,7 @@ package com.snowcap.pokedex.viewmodels
 
 import android.app.Application
 import android.util.Log
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.snowcap.pokedex.db.PokemonDatabase
 import com.snowcap.pokedex.models.Pokemon.Pokemon
 import com.snowcap.pokedex.network.RetrofitProvider
@@ -24,7 +21,7 @@ class PokemonListViewModel(application: Application) : AndroidViewModel(applicat
 
     private val retrofitProvider = RetrofitProvider()
     private val offset: Int = 0
-    private val limit: Int = 100
+    private val limit: Int = 20
 
     private val isMakingRequest: MutableLiveData<Boolean> = MutableLiveData()
     private val isError: MutableLiveData<Boolean> = MutableLiveData()
@@ -37,6 +34,8 @@ class PokemonListViewModel(application: Application) : AndroidViewModel(applicat
         return isError
     }
 
+    fun getFavoritePokemon() : LiveData<List<String>> = repository.favoritePokemon.asLiveData()
+
     fun getPokemonList(): Observable<List<Pokemon>> {
         isMakingRequest.postValue(true)
         return retrofitProvider.getPokeApiService().getPokemonList(offset, limit)
@@ -48,6 +47,7 @@ class PokemonListViewModel(application: Application) : AndroidViewModel(applicat
 //                    .toObservable()
 //            }
             .doOnError { error ->
+                Log.d("getPokemonList", error.toString())
                 isError.postValue(true)
                 isMakingRequest.postValue(false)
             }
@@ -58,10 +58,14 @@ class PokemonListViewModel(application: Application) : AndroidViewModel(applicat
                     .getPokemonDetail(item.name)
                     .map { detailResponse -> detailResponse }
                     .doOnError { error ->
+                        Log.d("getPokemonList", error.toString())
                         isError.postValue(true)
                         isMakingRequest.postValue(false)
                     }
-                    .onErrorReturn { error -> throw error }
+                    .onErrorReturn { error ->
+                        Log.d("getPokemonList", error.toString())
+                        throw error
+                    }
             }
             .sorted { first, second -> first.id.compareTo(second.id) }
             .toList()
