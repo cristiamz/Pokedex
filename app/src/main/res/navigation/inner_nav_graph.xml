@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/inner_nav_graph"
+    app:startDestination="@id/pokemonListFragment">
+
+    <fragment
+        android:id="@+id/pokemonListFragment"
+        android:name="com.snowcap.pokedex.fragments.PokemonListFragment"
+        android:label="fragment_pkm_list"
+        tools:layout="@layout/fragment_pkm_list" >
+        <action
+            android:id="@+id/action_pokemonListFragment_to_pokemonDetailFragment"
+            app:destination="@id/pokemonDetailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/recentPokemonListFragment"
+        android:name="com.snowcap.pokedex.fragments.RecentPokemonListFragment"
+        android:label="fragment_recent_pokemon_list"
+        tools:layout="@layout/fragment_recent_pokemon_list" >
+        <action
+            android:id="@+id/action_recentPokemonListFragment_to_pokemonDetailFragment"
+            app:destination="@id/pokemonDetailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/pokemonDetailFragment"
+        android:name="com.snowcap.pokedex.fragments.PokemonDetailFragment"
+        android:label="fragment_pkm_detail"
+        tools:layout="@layout/fragment_pkm_detail" >
+        <argument
+            android:name="pokemon"
+            app:argType="com.snowcap.pokedex.models.Pokemon.Pokemon" />
+    </fragment>
+</navigation>
