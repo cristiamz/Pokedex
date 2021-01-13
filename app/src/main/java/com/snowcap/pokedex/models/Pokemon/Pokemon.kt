@@ -32,7 +32,7 @@ data class Pokemon(
         parcel.readInt(),
         parcel.readInt(),
         parcel.readString()!!,
-        parcel.readParcelable(Sprites::class.java.classLoader)!!,
+        TODO("sprites"),
         parcel.createTypedArrayList(Types)!!,
         parcel.readByte() != 0.toByte()
     ) {
@@ -47,7 +47,6 @@ data class Pokemon(
         parcel.writeInt(order)
         parcel.writeInt(weight)
         parcel.writeString(location_area_encounters)
-        parcel.writeParcelable(sprites, flags)
         parcel.writeTypedList(types)
         parcel.writeByte(if (isFavorite) 1 else 0)
     }

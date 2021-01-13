@@ -6,9 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.navArgs
+import androidx.navigation.ui.setupWithNavController
 import com.snowcap.pokedex.R
+import kotlinx.android.synthetic.main.fragment_pkm_list.*
+import kotlinx.android.synthetic.main.fragment_top_menu.*
 
 class TopMenuFragment : Fragment() {
+
+//    private val args: TopMenuFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -20,7 +26,13 @@ class TopMenuFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //val navHostFragment = childFragmentManager.findFragmentById(R.id.fragment2) as NavHostFragment
-        //bottomNavigationView.setupWithNavController(navHostFragment.navController)
+
+//        welcomeText.text = when (args.Trainer.gender) {
+//            "Male" -> "Bienvenido, ${args.Trainer.name}"
+//            else -> "Bienvenida, ${args.Trainer.name}"
+//        }
+
+        val navHostFragment = childFragmentManager.findFragmentById(R.id.fragment2) as NavHostFragment
+        bottomNavigationView.setupWithNavController(navHostFragment.navController)
     }
 }

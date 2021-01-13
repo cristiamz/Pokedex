@@ -29,6 +29,12 @@ class PokemonListAdapter(val clickListener:(Pokemon) -> Unit)  :
             notifyDataSetChanged()
         }
 
+    var recentPokemon: List<String> = emptyList()
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
+
     private var filteredPokemons: List<Pokemon> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonViewHolder {

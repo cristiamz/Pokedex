@@ -29,4 +29,7 @@
     <string name="pokemon_type">Pokemon Type</string>
     <string name="pokemonimage">PokemonImage</string>
     <string name="pokemonfavorite">PokemonFavorite</string>
+    <string name="Recent">Recientes</string>
+    <string name="allList">Pokemon</string>
+    <string name="SearchRecent">Buscar Recientes</string>
 </resources>

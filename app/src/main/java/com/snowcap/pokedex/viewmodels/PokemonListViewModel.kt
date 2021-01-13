@@ -8,6 +8,7 @@ import com.snowcap.pokedex.models.Pokemon.Pokemon
 import com.snowcap.pokedex.network.RetrofitProvider
 import com.snowcap.pokedex.repository.PokemonRepository
 import io.reactivex.rxjava3.core.Observable
+import kotlinx.coroutines.flow.toCollection
 import kotlinx.coroutines.launch
 
 class PokemonListViewModel(application: Application) : AndroidViewModel(application) {
@@ -20,7 +21,7 @@ class PokemonListViewModel(application: Application) : AndroidViewModel(applicat
     }
 
     private val retrofitProvider = RetrofitProvider()
-    private val offset: Int = 0
+    private val offset: Int = 210
     private val limit: Int = 20
 
     private val isMakingRequest: MutableLiveData<Boolean> = MutableLiveData()

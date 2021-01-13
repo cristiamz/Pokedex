@@ -11,36 +11,20 @@
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
-            android:id="@+id/action_loginFragment_to_pkmListFragment"
-            app:destination="@id/pkmListFragment"
+            android:id="@+id/action_loginFragment_to_topMenuFragment"
+            app:destination="@id/topMenuFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
-        android:id="@+id/pkmDetailFragment"
-        android:name="com.snowcap.pokedex.fragments.PokemonDetailFragment"
-        android:label="fragment_pkm_detail"
-        tools:layout="@layout/fragment_pkm_detail" >
+        android:id="@+id/topMenuFragment"
+        android:name="com.snowcap.pokedex.fragments.TopMenuFragment"
+        android:label="fragment_top_menu"
+        tools:layout="@layout/fragment_top_menu" >
         <argument
-            android:name="pokemon"
-            app:argType="com.snowcap.pokedex.models.Pokemon.Pokemon" />
-    </fragment>
-    <fragment
-        android:id="@+id/pkmListFragment"
-        android:name="com.snowcap.pokedex.fragments.PokemonListFragment"
-        android:label="fragment_pkm_list"
-        tools:layout="@layout/fragment_pkm_list" >
-        <action
-            android:id="@+id/action_pkmListFragment_to_pkmDetailFragment"
-            app:destination="@id/pkmDetailFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
-        <argument
-            android:name="trainer"
+            android:name="Trainer"
             app:argType="com.snowcap.pokedex.models.Trainer" />
     </fragment>
 </navigation>

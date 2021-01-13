@@ -2,6 +2,7 @@ package com.snowcap.pokedex.repository
 
 import com.snowcap.pokedex.db.Pokemon
 import com.snowcap.pokedex.db.PokemonDAO
+import io.reactivex.rxjava3.core.Observable
 import kotlinx.coroutines.flow.Flow
 
 class PokemonRepository(private val pokemonDAO: PokemonDAO) {
@@ -19,5 +20,7 @@ class PokemonRepository(private val pokemonDAO: PokemonDAO) {
     }
 
     val favoritePokemon: Flow<List<String>> = pokemonDAO.getAllFavoritePokemon()
+
+    val recentPokemon: Flow<List<String>> = pokemonDAO.getAllRecentPokemon()
 
 }

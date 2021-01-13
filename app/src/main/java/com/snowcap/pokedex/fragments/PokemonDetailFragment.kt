@@ -7,18 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.request.RequestOptions
-import com.glide.slider.library.SliderLayout
-import com.glide.slider.library.animations.DescriptionAnimation
-import com.glide.slider.library.slidertypes.BaseSliderView
-import com.glide.slider.library.slidertypes.TextSliderView
-import com.google.android.material.snackbar.Snackbar
 import com.snowcap.pokedex.R
 import kotlinx.android.synthetic.main.fragment_pkm_detail.*
 import kotlinx.android.synthetic.main.fragment_pkm_detail.view.*
-import kotlinx.android.synthetic.main.fragment_pkm_list.*
-import kotlinx.android.synthetic.main.pokemon_list_item.view.*
 
 
 class PokemonDetailFragment : Fragment() {

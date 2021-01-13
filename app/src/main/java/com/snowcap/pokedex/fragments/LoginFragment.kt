@@ -47,7 +47,7 @@ class LoginFragment : Fragment() {
                         else -> "Female"
                     }
 
-                    val action = LoginFragmentDirections.actionLoginFragmentToPkmListFragment(
+                    val action = LoginFragmentDirections.actionLoginFragmentToTopMenuFragment (
                         Trainer(
                             trainerTextEditInput.text.toString(),
                             gender

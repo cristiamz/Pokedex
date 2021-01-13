@@ -25,13 +25,13 @@ import java.util.concurrent.TimeUnit
 class PokemonListFragment : Fragment() {
     private val disposables: CompositeDisposable = CompositeDisposable()
     private val listViewModel: PokemonListViewModel by viewModels()
-    private val args: PokemonListFragmentArgs by navArgs()
+
 
     private val adapter = PokemonListAdapter { pokemon ->
         listViewModel.saveFavorite(pokemon, true)
         val newPokemon :Pokemon = pokemon
 
-        val action = PokemonListFragmentDirections.actionPkmListFragmentToPkmDetailFragment(newPokemon)
+        val action = PokemonListFragmentDirections.actionPokemonListFragmentToPokemonDetailFragment (newPokemon)
         findNavController().navigate(action)
     }
 
@@ -51,11 +51,6 @@ class PokemonListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        welcomeText.text = when (args.trainer.gender) {
-            "Male" -> "Bienvenido, ${args.trainer.name}"
-            else -> "Bienvenida, ${args.trainer.name}"
-        }
 
         pokemonRecyclerView.adapter = adapter
         pokemonRecyclerView.addItemDecoration(
