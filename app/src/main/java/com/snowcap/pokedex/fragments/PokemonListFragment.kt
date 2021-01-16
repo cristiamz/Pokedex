@@ -64,7 +64,7 @@ class PokemonListFragment : Fragment() {
             adapter.favoritePokemon = favoriteList
         }
 
-        listViewModel.getPokemonList()
+        disposables.add(listViewModel.getPokemonList()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnError { error ->
@@ -77,7 +77,7 @@ class PokemonListFragment : Fragment() {
                     if (pokemonList.isEmpty()) View.GONE else View.VISIBLE
                 emptyTextView.visibility =
                     if (pokemonList.isEmpty()) View.VISIBLE else View.GONE
-            }
+            })
 
         listViewModel.getIsLoading().observe(viewLifecycleOwner) { isLoading ->
             progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
